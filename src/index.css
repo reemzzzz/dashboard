@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap');
+
+ html, body {
+  height: 100vh;
+  /* overflow: hidden;  */
+  /* font-family: 'Source Sans 3', sans-serif; */
+  font-family: 'Source Sans 3', sans-serif ;
+}
+
+:lang(ar) {
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+}
+
+#root {
+  height: 100vh;
+}
+
+
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* overflow: hidden; */
+}
+
+button {
+  cursor: pointer;
+}
+
+/* 
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track{
+  background: #e0e0e0;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #888;
+}
+
+::-webkit-scrollbar-track:hover{
+  background: #555;
+} */
+
+
