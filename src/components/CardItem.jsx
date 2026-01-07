@@ -21,62 +21,74 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
     
 
     return (
-        <Card 
+        <Card className="cursor-pointer w-70 relative"
             sx={{ 
-                width: 250,
                 backgroundColor: theme.palette.mode === "dark"
                 ? colors.primary[500]
                 : colors.primary[400] ,
                 boxShadow: theme.shadows[4],
                 "&:hover": {
-                    boxShadow:  `${colors.blueAccent[800]} 0px 5px 15px` ,
+                    boxShadow:  `${colors.blueAccent[700]} 0px 10px 25px` ,
                 },
                 borderRadius: "12px",
+                // position:"relative",
             }} 
-            className="cursor-pointer"
         >
-             <CardHeader 
+            <IconButton 
+            onClick={()=>onPin(card.id,tabName)}
+            sx={{
+                    position: "absolute",
+                    top: 8,
+                    right: 8,
+                    zIndex: 2,
+                    // border: `0.5px dashed ${colors.primary[900]}`  ,
+                    backdropFilter: "blur(4px)",
+                    backgroundColor: card.pinned ? `${colors.greenAccent[500]}20` : "rgba(0,0,0,0.2)",
+                    "&:hover": { backgroundColor: `${colors.grey[200]}`}
+                }}
+            >
+                {card.pinned? <PushPinIcon 
+                sx={{
+                    fontSize: 25,
+                    color: theme.palette.mode === "dark"
+                    ? colors.greenAccent[600]
+                    : colors.greenAccent[400]
+                }}/>  
+                :<PushPinOutlinedIcon
+                    sx={{fontSize: 25}}
+                />}
+            </IconButton>
+             {/* <CardHeader 
                 title = {
                     <Typography sx={{ fontWeight: 700, fontSize: '1.3rem', color: colors.blueAccent[200] }}>
                        {card.company}
                     </Typography>
                 }          
                 action = {
-                        <IconButton onClick={()=>onPin(card.id,tabName)}>
-                            {card.pinned? <PushPinIcon 
-                            sx={{
-                                fontSize: 25,
-                                color: theme.palette.mode === "dark"
-                                ? colors.greenAccent[600]
-                                : colors.greenAccent[400]
-                            }}/>  
-                            :<PushPinOutlinedIcon
-                                sx={{fontSize: 25}}
-                            />}
-                        </IconButton>
                         
                     
                 }
-            />
-            <CardMedia
+            /> */}
+            <CardMedia className="h-30 w-full"
                 component="img"
                 image={card.img}
                 alt="Device"
                 sx={{
-                    height: 180,
-                    width: "100%",
                     objectFit: "cover",          
                     borderTopLeftRadius: "12px",
                     borderTopRightRadius: "12px",
-                    transition: "transform 0.3s ease-in-out",
+                    transition: "transform 0.4s ease-in-out",
                     "&:hover": {
-                    transform: "scale(1.03)", 
+                    transform: "scale(1.04)", 
+                    
                     },
                 }}
             />
-            {/* --- ENHANCED CARD CONTENT START --- */}
-            <CardContent sx={{ display: "flex", justifyContent: "space-between", paddingBottom: 1.5 }}>
-                <Box sx={{ textAlign: "left" }}>
+            <CardContent 
+            className="flex flex-col pb-1"
+            // sx={{ display: "flex", justifyContent: "space-between", paddingBottom: 1.5 }}
+            >
+                <Box>
                     <Typography variant="h6" sx={{ color: colors.blueAccent[200], fontWeight: 700, marginBottom: "4px" }} >
                         Model: {card.model} {/* Bolded 'Model:' */}
                     </Typography>
@@ -154,7 +166,7 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                         />
                     )}
 
-                    {tabName !== "estlam" && tabName !== "done" && tabName !=="amrTawreed" &&
+                    {tabName !== "estlam" && tabName !== "done"  &&
                     <Tooltip title="Move Back">
                         <IconButton
                         onClick={onReplay}

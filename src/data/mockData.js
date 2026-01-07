@@ -38,6 +38,18 @@ try {
 }
 
 
+export const mockDevices = [
+        { id: 1,status: "estlam",  company: "El Nesr",date:"September 14, 2025" ,model: "MA50R", sn: "7484937", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID:   null,img: "../../assets//hachLogo.png"},
+        { id: 2,status: "estlam",  company: "Pharco",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID:  null,img: "../../assets//memmertLogo.png"},
+        { id: 3,status: "estlam",  company: "Eva",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID: null,img: "../../assets/memmertLogo.png"},
+        { id: 4,status: "estlam",  company: "Water Asiout",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID:    null,img: "../../assets//hachLogo.png"},
+        { id: 5,status: "estlam",  company: "Water Menya",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID: null,img: "../../assets//memmertLogo.png"},
+        { id: 6,status: "estlam",  company: "Water Mnufya",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID:    null,img: "../../assets/radwag.jpg"},
+        { id: 7,status: "estlam",  company: "Eva",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false ,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null,file3Url: null,file3Name: null,receivedBy:"",receivedByID: null,img: "../../assets//memmertLogo.png"},
+        { id: 8,status: "estlam",  company: "Pharco",date:"October 20, 2025", model: "XA210", sn: "1234567", checked: false,pinned:false,fileUrl: null,fileName: null,file2Url: null,file2Name: null ,file3Url: null,file3Name: null,receivedBy:"",receivedByID:   null,img: "../../assets/hachLogo.png" },
+]
+
+
 export const mockDataTeam = 
     users.map((u)=>({
   
