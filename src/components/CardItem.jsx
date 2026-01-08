@@ -4,6 +4,9 @@ import PushPinOutlinedIcon from '@mui/icons-material/PushPinOutlined';
 import ReplayIcon from '@mui/icons-material/Replay';
 import { tokens } from "../theme";
 import FileUploader from "./FileUploader";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import SettingsIcon from "@mui/icons-material/Settings";
+import BadgeIcon from "@mui/icons-material/Badge";
 // Removed unused 'useState' as file state is managed by parent
 
 
@@ -21,43 +24,47 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
     
 
     return (
-        <Card className="cursor-pointer w-70 relative"
+        <Card className="cursor-pointer w-70 "
             sx={{ 
-                backgroundColor: theme.palette.mode === "dark"
-                ? colors.primary[500]
-                : colors.primary[400] ,
+                backgroundColor: colors.primary[400],
                 boxShadow: theme.shadows[4],
                 "&:hover": {
-                    boxShadow:  `${colors.blueAccent[700]} 0px 10px 25px` ,
+                    boxShadow:  `${colors.blueAccent[700]} 0px 6px 15px` ,
                 },
                 borderRadius: "12px",
-                // position:"relative",
             }} 
         >
-            <IconButton 
-            onClick={()=>onPin(card.id,tabName)}
-            sx={{
-                    position: "absolute",
-                    top: 8,
-                    right: 8,
-                    zIndex: 2,
-                    // border: `0.5px dashed ${colors.primary[900]}`  ,
-                    backdropFilter: "blur(4px)",
-                    backgroundColor: card.pinned ? `${colors.greenAccent[500]}20` : "rgba(0,0,0,0.2)",
-                    "&:hover": { backgroundColor: `${colors.grey[200]}`}
-                }}
-            >
-                {card.pinned? <PushPinIcon 
-                sx={{
-                    fontSize: 25,
-                    color: theme.palette.mode === "dark"
-                    ? colors.greenAccent[600]
-                    : colors.greenAccent[400]
-                }}/>  
-                :<PushPinOutlinedIcon
-                    sx={{fontSize: 25}}
-                />}
-            </IconButton>
+                <Box className="flex justify-between px-1">
+                    <Box
+                        sx={{
+                            height: "40%",
+                            display: "flex",
+                            alignItems: "flex-end",
+                            p: 1.5
+                        }}
+                        >
+                        <Typography variant="h5" sx={{ color: colors.blueAccent[200], fontWeight: 700, lineHeight: 1.2 }}>
+                            {card.company}
+                        </Typography>
+                    </Box>
+                     <IconButton 
+                        onClick={()=>onPin(card.id,tabName)}
+                        className="z-2 "
+                    
+                        >
+                            {card.pinned? <PushPinIcon 
+                            sx={{
+                                fontSize: 25,
+                                color: theme.palette.mode === "dark"
+                                ? colors.greenAccent[600]
+                                : colors.greenAccent[400]
+                            }}/>  
+                            :<PushPinOutlinedIcon
+                                sx={{fontSize: 25}}
+                            />}
+                        </IconButton>
+            
+                     </Box>
              {/* <CardHeader 
                 title = {
                     <Typography sx={{ fontWeight: 700, fontSize: '1.3rem', color: colors.blueAccent[200] }}>
@@ -69,7 +76,8 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                     
                 }
             /> */}
-            <CardMedia className="h-30 w-full"
+            <Box className=" overflow-hidden">
+                <CardMedia className="h-30 w-full"
                 component="img"
                 image={card.img}
                 alt="Device"
@@ -84,38 +92,56 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                     },
                 }}
             />
+
+             
+
+            </Box>
             <CardContent 
             className="flex flex-col pb-1"
             // sx={{ display: "flex", justifyContent: "space-between", paddingBottom: 1.5 }}
             >
-                <Box>
-                    <Typography variant="h6" sx={{ color: colors.blueAccent[200], fontWeight: 700, marginBottom: "4px" }} >
-                        Model: {card.model} {/* Bolded 'Model:' */}
-                    </Typography>
-                    <Typography variant="body1" sx={{color: colors.grey[400] ,fontWeight: 600, marginBottom: "4px" }}>
-                        SN: {card.sn} {/* Bolded 'SN:' and slightly increased font weight */}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: colors.grey[500], fontSize: "0.85rem" }}> {/* Slightly reduced font size for date */}
-                        Date: {card.date} {/* Added 'Date:' label and bolded */}
-                    </Typography>
+                <Box className="mb-3">
+                    <Box className="flex items-center gap-1 mb-1">
+                        <SettingsIcon sx={{ fontSize: 16, color: colors.blueAccent[300] }}  />
+                        <Typography variant="body1" sx={{ color: colors.blueAccent[200]}} >
+                            {card.model} 
+                        </Typography>
+                    </Box>
+                    <Box className="flex items-center gap-1 mb-1">
+                        <BadgeIcon sx={{ fontSize: 16, color: colors.blueAccent[300] }}/>
+                        <Typography variant="caption" sx={{color: colors.grey[300] ,letterSpacing: "0.5px" }}>
+                            SN: {card.sn} 
+                        </Typography>
+                    </Box>
+                    <Box className="flex items-center gap-1 mb-1">
+                        <CalendarTodayIcon sx={{ fontSize: 16, color: colors.blueAccent[300] }} />
+                        <Typography variant="caption" sx={{ color: colors.grey[300], letterSpacing: "0.5px"}}> {/* Slightly reduced font size for date */}
+                             {card.date} 
+                        </Typography>
+                    </Box>
                 </Box>
+
                         
-                <FileUploader
+                
+
+             <Box >
+                <Typography variant="caption" className="uppercase !font-bold !mb-3" sx={{color:colors.grey[300],}}>
+                    Documents
+                </Typography>
+               <Box className="flex">
+                 <FileUploader
                     fileUrl={card.fileUrl}
                     fileName={card.fileName}
                     toolTipText={"المقايسة"}
-                    // Pass upload handler only if on Estlam and no file uploaded
+                  
                     onFileUploaded={
                         isEstlamTab && !isFileUploaded
                             ? (url, name) => onFileUploaded(card.id, url, name, tabName)
                             : undefined
                     }
-                    // Pass delete handler only if on Estlam AND file is present
+                    
                     onDelete={isEstlamTab && isFileUploaded ? () => onFileDelete(card.id,"estlam") : undefined}
                 />
-
-             <Box>
-                 {/* This FileUploader remains unchanged */}
                 {(isMaintainedTab || tabName === "done" || tabName === "amrTawreed")&& (
                     <FileUploader 
                         toolTipText={"الفاتورة"}
@@ -133,26 +159,31 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                         fileName={card.file3Name}
                         onDelete={tabName === "amrTawreed" && isFile3Uploaded ? () => onFileDelete(card.id,"amrTawreed") : undefined}
                 />)}
+               </Box>
                 
-                {/* Minor styling improvement for done tab text */}
-                    {(tabName === "done" || tabName === "amrTawreed") && card.receivedBy && (
-                        <Box sx={{ mt: 1 }}> {/* Added margin top for separation */}
-                            <Typography variant="body2" sx={{ color: colors.grey[500] }}>
+                    
+             </Box >
+             {(tabName === "done" || tabName === "amrTawreed") && card.receivedBy && (
+                        <Box className="mt-2 p-4 rounded-xl border-1 border-dashed"
+                        sx={{ 
+                            backgroundColor: theme.palette.mode === "dark"?colors.primary[400]:colors.grey[900],
+                            borderColor: colors.grey[600]
+                         }}> 
+                            <Typography variant="body2" sx={{ color:theme.palette.mode === "dark"? colors.grey[200]:colors.grey[500] }}>
                                 Received by: {card.receivedBy}
                             </Typography>
-                            <Typography variant="body2" sx={{ color: colors.grey[500] }}>
+                            <Typography variant="body2" sx={{ color:theme.palette.mode === "dark"? colors.grey[200]:colors.grey[500] }}>
                                 ID: {card.receivedByID}
                             </Typography>
                         </Box>
-                        )}
-             </Box>
+                )}
 
 
             </CardContent>
-            {/* --- ENHANCED CARD CONTENT END --- */}
                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", px: 2, pb: 1 }}>
                     {!card.checked && (
-                        <Checkbox
+                        <Box className="flex items-center">
+                            <Checkbox
                             defaultChecked={tabName === "done"}
                             onChange={onChecked}
                             // Checkbox is DISABLED if no file is uploaded (isFileUploaded is false)
@@ -164,7 +195,13 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                                 fontSize: 30
                             }}
                         />
+
+                        <Box className="">
+                            {tabName === "done"?"COMPLETED":"PENDING"}
+                        </Box>
+                        </Box>
                     )}
+                    <br />
 
                     {tabName !== "estlam" && tabName !== "done"  &&
                     <Tooltip title="Move Back">
@@ -172,7 +209,7 @@ const CardItem = ({card,onChecked,onReplay,tabName,onPin,onFileUploaded, onFileD
                         onClick={onReplay}
                         sx={{
                             color: colors.grey[400],
-                            "&:hover": { color: colors.blueAccent[400], transform: "rotate(-180deg)", transition: "0.3s" },
+                            "&:hover": { color: colors.blueAccent[500], transform: "rotate(-180deg)", transition: "0.3s" },
                         }}
                         >
                         <ReplayIcon sx={{ fontSize: 20 }} />

@@ -118,7 +118,6 @@ function FileUploader({onFileUploaded, fileUrl, fileName,onDelete, toolTipText})
                                 
                 </LightTooltip>
                 ):( 
-                /* Show file icon (viewer/download) if a file is present */
                     localFileUrl && (
                      <>
                 <Box sx={{ display: flex ,alignItems: 'center', gap: 0.5  }}>
@@ -126,30 +125,40 @@ function FileUploader({onFileUploaded, fileUrl, fileName,onDelete, toolTipText})
 
                             title={toolTipText}
                         >
-                            <IconButton
+                            <IconButton className="relative"
                                 onClick={handleFileOpen}
                                 sx={{
-                                    color: colors.grey[400],
-                                    "&:hover": { color: colors.greenAccent[400]},
+                                    color: theme.palette.mode === "dark"?colors.blueAccent[400]:colors.blueAccent[300],
+                                    "&:hover": { color: colors.greenAccent[400],bgcolor:"transparent"},
                                 }}
                                 >
                                 <InsertDriveFileIcon sx={{ fontSize: 25 }} />
+                                {onDelete && (
+                                    
+                                         <IconButton
+                                    size="small"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        onDelete();
+                                    }}
+                                    sx={{
+                                        position: "absolute",
+                                        top: -2,
+                                        right: -2,
+                                        width: 18,
+                                        height: 18,
+                                        color: "white",
+                                        backgroundColor: colors.redAccent[500],
+                                        "&:hover": { bgcolor: colors.redAccent[700]},
+                                    }}
+                                        >
+                                            <DeleteIcon sx={{ fontSize: 15,color:"white", }}/>
+                                        </IconButton>
+                                        
+                                            
+                                )}
                             </IconButton>
                         </LightTooltip>
-                        {onDelete && (
-                            <LightTooltip title={"Remove"}>
-                                <IconButton 
-                                    onClick={onDelete}
-                                    sx={{
-                                    color: colors.grey[400],
-                                    "&:hover": { color: colors.redAccent[400]},
-                                    
-                                }}
-                                >
-                                    <DeleteIcon sx={{ fontSize: 22 }}/>
-                                </IconButton>
-                        </LightTooltip>
-                        )}
                     </Box>
                     
                     <Modal

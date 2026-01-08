@@ -1,16 +1,20 @@
-import { borderBottomColor, borderRadius, color, fontFamily, fontSize, fontWeight } from "@mui/system";
-import { Box, Button, ButtonGroup, Tab, Tabs, useTheme} from "@mui/material";
+import { alignItems, borderBottomColor, borderRadius, color, fontFamily, fontSize, fontWeight } from "@mui/system";
+import { Box, Button, ButtonGroup, Tab, Tabs, useMediaQuery, useTheme} from "@mui/material";
 import { use, useEffect, useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import CardItem from "../../../components/CardItem";
 import { tokens } from "../../../theme";
 import { mockDevices } from "../../../data/mockData";
+// useMediaQuery
 
 
 const Devices = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+      const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+
 
     //set cards in local storage
    
@@ -47,12 +51,6 @@ const Devices = () => {
     const savedTab = localStorage.getItem("currentTab");
 
     const [tabValue,setTabValue] = useState(savedTab);
-    const [estlamCards,setEstlamCards] = useState(cards);
-    const [fa7sCards,setFa7sCards] = useState([])
-    const [amrShoghlCards,setAmrShoghlCards] = useState([])
-    const [maintainedCards,setMaintainedCards] = useState([])
-    const [amrTawreedCards,setAmrTawreedCards] = useState([])
-    const [doneCards,setDoneCards] = useState([])
  
     // useEffect(()=>{
     //     localStorage.setItem("cards",JSON.stringify(cards))
@@ -101,172 +99,7 @@ const Devices = () => {
        
     };
 
-    // const handleMaintainedToDone = () => {
-    //     return(
-    //         <FileUploader />
-    //     )
-    // }
-
-    const handleCheckBoxClick = (id) => {
-
-            setCards(
-                cards.map((c)=>c.id === id?{...c,status:c.next,checked:false}:c)
-            )
-            
-
-
-//         let src,setSrc,dest,setDest ;
-//         switch (from){
-//             case "estlam":
-//                 src = estlamCards;
-//                 setSrc = setEstlamCards;
-//                 break;
-//             case "fa7s":
-//                 src = fa7sCards;
-//                 setSrc = setFa7sCards;
-//                 break;
-//             case "amrShoghl":
-//                 src = amrShoghlCards;
-//                 setSrc = setAmrShoghlCards;
-//                 break;
-//             case "maintained":
-//                 src = maintainedCards;
-//                 setSrc = setMaintainedCards;
-
-//                 break;
-//             case "amrTawreed":
-//                 src = amrTawreedCards;
-//                 setSrc = setAmrTawreedCards;
-
-//                 break;
-//             
-//             default:
-//                 return;
-//         }
-
-//         switch(to) {
-//             case "fa7s":
-//                 dest = fa7sCards;
-//                 setDest = setFa7sCards;
-//                 break;
-//             case "amrShoghl":
-//                 dest = amrShoghlCards;
-//                 setDest = setAmrShoghlCards;
-//                 break;
-//             case "maintained":
-//                 dest = maintainedCards;
-//                 setDest = setMaintainedCards;
-//                 break;
-//             case "amrTawreed":
-//                 dest = amrTawreedCards;
-//                 setDest = setAmrTawreedCards;
-
-//                 break;
-//             case "done":
-//                 dest = doneCards;
-//                 setDest = setDoneCards;
-//                 break;
-//             default:
-//                 return ; 
-//         }
-
-//         const card = src.find((c) => c.id === id);
-//         if(!card) return;
-
-//         let receivedBy = card.receivedBy;
-//         let receivedByID = card.receivedByID;
-//         if (from === "maintained" && to === "amrTawreed") {
-//             receivedBy = prompt("Please enter the person name before completing:");
-//             if (!receivedBy) return alert("Name is required to complete.");
-
-//               receivedByID = prompt("Please enter your ID number:");
-//   if        (!receivedByID) return alert("ID is required to complete.");
-//         }
-//         
-//         setSrc(src.filter((c) => c.id !== id));
-//         setDest([...dest, { ...card,checked:false ,receivedBy: from === "maintained"?receivedBy:card.receivedBy,receivedByID: from === "maintained"?receivedByID:card.receivedByID}]) 
-//         setDest( cards=> cards.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)))
-//         
-        
-
-        enqueueSnackbar(`Item transferred to ${arabicDisplay(to)} successfully!`, { variant: 'success' ,
-            autoHideDuration: 2000,
-            anchorOrigin: {vertical: "bottom", horizontal: "right"},
-            style: {
-                backgroundColor:
-                theme.palette.mode === 'dark'
-                    ? colors.greenAccent[700]
-                    : colors.greenAccent[400]
-            }
-        });
-
-
-
-    }
-    const moveCardBackward = (card,from,to) => {
-        let src,setSrc,dest,setDest;
-         
-        switch (from){
-            case "done":
-                src = doneCards;
-                setSrc = setDoneCards;
-                break;
-            case "fa7s":
-                src = fa7sCards;
-                setSrc = setFa7sCards;
-                break;
-            case "amrShoghl":
-                src = amrShoghlCards;
-                setSrc = setAmrShoghlCards;
-                break;
-            case "maintained":
-                src = maintainedCards;
-                setSrc = setMaintainedCards;
-                break;
-            case "amrTawreed":
-                src = amrTawreedCards;
-                setSrc = setAmrTawreedCards;
-                break;
-            default:
-                return;
-        }
-
-        switch(to) {
-            case "fa7s":
-                dest = fa7sCards;
-                setDest = setFa7sCards;
-                break;
-            case "amrShoghl":
-                dest = amrShoghlCards;
-                setDest = setAmrShoghlCards;
-                break;
-            case "estlam":
-                dest = estlamCards;
-                setDest = setEstlamCards;
-                break;
-            case "maintained":
-                dest = maintainedCards;
-                setDest = setMaintainedCards;
-                break;
-            case "amrTawreed":
-                dest = amrTawreedCards;
-                setDest = setAmrTawreedCards;
-                break;
-            default:
-                return ; 
-        }
-        setSrc(src.filter((c) => c.id !== card.id))
-        setDest([...dest, { ...card, checked: false }])
-        setDest(cards=> cards.sort((a,b)=>(b.pinned?1:0)-(a.pinned?1:0)))
-      
-        
-
-        enqueueSnackbar(`Item returned to ${arabicDisplay(to)} successfully!`, { variant: 'info' ,
-            autoHideDuration: 2000,
-            style: {backgroundColor: theme.palette.mode === "dark"? colors.blueAccent[600]:colors.blueAccent[600]},
-            anchorOrigin: {vertical: "bottom", horizontal: "right"},
-        });
-    }
+  
     const arabicDisplay = (tabName) => {
          if(tabName === "estlam"){
             return "استلام"
@@ -317,12 +150,15 @@ const Devices = () => {
 
 
     const tabStyle = {
+        // alignItems: "center",
+        
         borderRadius: 1,
-        fontSize: '20px',
+        fontSize: isMobile ? '14px' : '18px',
         fontWeight: '600',
         fontFamily: "'Tajawal',sans-serif",
-        direction: 'rtl',
+//         direction: 'rtl',
         color: colors.grey[100],
+        minWidth: isMobile ? '80px' : '140px',
         "&:hover": {
             backgroundColor: theme.palette.mode === "dark"
             ? colors.primary[400]
@@ -341,33 +177,48 @@ const Devices = () => {
 
 
     return (
-        <Box className="mx-7">
-            {/* <Header title={"DEVICES"} subtitle={"Current Devices present in the system"}/> */}
+        <Box>
             
-            <Box className="flex flex-col justify-center items-center" >
-                <TabContext value={tabValue}>
-                <Box sx={{ borderBottom: 2 , borderColor: 'divider'}}>
-                    <TabList 
-                        TabIndicatorProps={{
-                            sx: {
-                                backgroundColor: colors.primary[100],
-                            }
-                        }}
-                        onChange={handleTabChange}
-
-                    >
-                        {tabs.map((tab)=>
-                            <Tab label={tab.label} value={tab.val} sx={{ ...tabStyle }}/>
-                        )}
-                    </TabList>
-                </Box>
+            <TabContext value={tabValue}>
+                <Box 
+                      className="flex flex-col justify-center"
+                sx={{
+                    borderBottom: 2,
+                    borderColor: 'divider',
+                    ...(!isMobile && {
+                        position: "sticky",
+                        top:0,
+                        backgroundColor: theme.palette.mode === "dark"?colors.primary[500]:"white",
+                        zIndex: 100,
+                    })
+                }}  >
+                  <Tabs 
+                //   className="fullwidth"
+                //   fullWidth
+                    value={tabValue}
+                    onChange={handleTabChange}
+                    variant={isMobile?"scrollable":"fullWidth"}
+                    scrollButtons={isMobile?"auto":false}
+                    allowScrollButtonsMobile
+                    // TabIndicatorProps={{
+                    //     sx: { backgroundColor: colors.primary[100], height: 3}
+                    // }}
+                  >
+                    {tabs.map((tab)=>
+                            <Tab key={tab.val} label={tab.label} value={tab.val} sx={tabStyle}/>
+                    )}
+                    
+                    </Tabs>  
+                </Box>
+                
                 {tabs.map((tab)=>
                 <TabPanel value={tab.val}>
-                    <Box className="flex justify-center items-center gap-3 flex-wrap mt-2 px-5">
+                    <Box className="flex justify-center items-center gap-6 flex-wrap mt-2 px-5">
                         {cards.filter(c=>c.status === tab.name).map((card)=>(
                             <CardItem 
                                 key={card.id}
                                 card={card}
+                                
                                 tabName = {tab.name}
                                 onChecked={() => {
                                     if (card.status === "done") return;
@@ -398,7 +249,6 @@ const Devices = () => {
 
                                 onReplay={()=>moveCard(card.id,tab.prev)}
                                 onPin={handlePinClick}
-                                // FIX: Updated signature for onFileUploaded to pass file name
                                 onFileUploaded={handleFileUploaded} 
                                 onFileDelete={handleFileDelete}
                             
@@ -407,8 +257,9 @@ const Devices = () => {
                     </Box>
                 </TabPanel>)}
 
-            </TabContext>
-            </Box>
+            
+{/*             </Box> */}
+            </TabContext>
         </Box>
     )
 }
