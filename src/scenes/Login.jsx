@@ -127,7 +127,7 @@ const Login = () => {
                         // className="mb-2 w-15 h-15"
                         mb={1}
                         component="img"
-                        src="../../public/assets/logo-icon.png"
+                        src="../assets/logo-icon.png"
                         alt="El Safwa Logo"
                         sx={{
                             width: "60px",
