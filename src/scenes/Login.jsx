@@ -209,7 +209,7 @@ const Login = () => {
                                         >
                                             <MenuItem value={"sales"}>Sales</MenuItem>
                                             <MenuItem value={"maintenance"}>Maintenance</MenuItem>
-                                            <MenuItem value={"service"}>Service</MenuItem>
+                                            {/* <MenuItem value={"service"}>Service</MenuItem> */}
                                             <MenuItem value={"accounting"}>Accounting</MenuItem>
                                         </Select>
                                     </FormControl>

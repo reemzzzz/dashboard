@@ -6,7 +6,7 @@ export const mockUsers = [
     email: "admin@company.com",
     password: "Admin@123",
     role: "Manager",
-    departmentId: "service",
+    departmentId: "maintenance",
     name: "Administrator",
     phone: "010051097",
     id: "123",
@@ -16,7 +16,7 @@ export const mockUsers = [
     email: "eng@company.com",
     password: "Eng@123",
     role: "Engineer",
-    departmentId: "production",
+    departmentId: "accounting",
     name: "Engineer User",
     phone: "01097027618",
     id: "456",
@@ -61,9 +61,9 @@ export const mockDataTeam =
 }))
 
 export const mockReportsData = [
-    { id: 1, employee: "Eng. Ahmed Abdelrahman", team: "Engineering", month: "2025-05", tasksCompleted: 95, successRate: 0.92, efficiencyScore: 8.5, performanceStatus: "High Performer" },
-    { id: 2, employee: "Eng. Mohamed Safwat", team: "Engineering", month: "2025-05", tasksCompleted: 78, successRate: 0.75, efficiencyScore: 6.2, performanceStatus: "On Target" },
-    { id: 3, employee: "Eng. Reem Elsokary", team: "Engineering", month: "2025-05", tasksCompleted: 65, successRate: 0.60, efficiencyScore: 5.1, performanceStatus: "Needs Focus" },
+    { id: 1, employee: "Eng. Ahmed ", team: "Engineering", month: "2025-05", tasksCompleted: 95, successRate: 0.92, efficiencyScore: 8.5, performanceStatus: "High Performer" },
+    { id: 2, employee: "Eng. Mohamed ", team: "Engineering", month: "2025-05", tasksCompleted: 78, successRate: 0.75, efficiencyScore: 6.2, performanceStatus: "On Target" },
+    { id: 3, employee: "Eng. Reem ", team: "Engineering", month: "2025-05", tasksCompleted: 65, successRate: 0.60, efficiencyScore: 5.1, performanceStatus: "Needs Focus" },
 ];
 
 export const mockManualsData = [
