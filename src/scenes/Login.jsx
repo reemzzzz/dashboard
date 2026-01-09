@@ -25,7 +25,7 @@ const Login = () => {
   const [Reload, setReload] = useState(false);
 // const {setIsLoggedIn} = useAuth();
     useEffect(() => {
-      setReload(true);
+      setTimeout(()=>setReload(true),200)
     }, []);
     const { enqueueSnackbar } = useSnackbar();
 
